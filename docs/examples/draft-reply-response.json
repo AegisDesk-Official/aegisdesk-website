@@ -1,0 +1,14 @@
+{
+  "reply": "Standard returns are accepted within 30 calendar days of delivery, provided original packaging is retained.",
+  "citations": [
+    {
+      "document_id": "9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d",
+      "page": 3,
+      "quote": "Opened items may be returned within 30 calendar days of delivery subject to inspection."
+    }
+  ],
+  "grounded": true,
+  "handed_to_human": false,
+  "cost_usd": 0.0035,
+  "simulated": false
+}

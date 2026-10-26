@@ -1,0 +1,399 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* ---------------------------------------------------------------------- */
+    /* DESIGN.md Foundation Tokens (Source of Truth)                          */
+    /* ---------------------------------------------------------------------- */
+    --canvas: #0B0F0D;
+    --surface: #111713;
+    --surface-2: #17201B;
+    --line: rgba(214, 235, 224, 0.10);
+    --line-strong: rgba(214, 235, 224, 0.18);
+    --text: #E8EDE8;
+    --text-dim: #9AA8A0;
+    --text-faint: #8E9E95;
+    --brand: #0A433A;
+    --glow: #2FA67F;
+    --paper: #F4EFE9;
+    --paper-ink: #111311;
+    --paper-line: rgba(17, 19, 17, 0.14);
+    --verified: #6FD8A6;
+    --warn: #E3B341;
+    --blocked: #E5645C;
+
+    /* Shape & Radius Tokens */
+    --radius-panel: 16px;
+    --radius-button: 10px;
+    --radius-chip: 6px;
+
+    /* Spacing & Layout Tokens */
+    --container-max: 1200px;
+    --section-pad-desktop: 140px;
+    --section-pad-mobile: 88px;
+    --side-pad-desktop: 48px;
+    --side-pad-mobile: 24px;
+
+    /* Legacy tokens preserved for existing components (to be pruned later) */
+    --background: 150 13% 3%;
+    --foreground: 42 29% 94%;
+    --card: 150 12% 6%;
+    --card-foreground: 42 29% 94%;
+    --popover: 150 12% 6%;
+    --popover-foreground: 42 29% 94%;
+    --primary: 42 29% 94%;
+    --primary-foreground: 150 13% 4%;
+    --secondary: 150 10% 10%;
+    --secondary-foreground: 42 29% 94%;
+    --muted: 150 10% 10%;
+    --muted-foreground: 150 6% 66%;
+    --accent: 150 10% 10%;
+    --accent-foreground: 42 29% 94%;
+    --destructive: 0 62% 40%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 150 8% 15%;
+    --input: 150 8% 15%;
+    --ring: 152 60% 52%;
+    --radius: 0.75rem;
+
+    /* Sylva Spatial Editorial Tokens */
+    --font-lexend: "Lexend";
+    --sylva-obsidian: #070908;
+    --sylva-obsidian-elevated: #0C100E;
+    --sylva-hairline: rgba(255, 255, 255, 0.065);
+    --sylva-specular: inset 0 1px 0 0 rgba(255, 255, 255, 0.12);
+    --sylva-dossier-bg: #F2F3EF;
+    --sylva-dossier-ink: #1C201B;
+    --sylva-dossier-label: #6E746B;
+    --sylva-dossier-border: #DCDFD6;
+    --sylva-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+    --sylva-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    scroll-padding-top: 5.5rem;
+    color-scheme: dark;
+    -webkit-text-size-adjust: 100%;
+    overflow-x: hidden;
+    max-width: 100%;
+    background-color: var(--canvas);
+  }
+  body {
+    @apply bg-[var(--canvas)] text-[var(--text)] antialiased;
+    font-family: var(--font-sans);
+    font-weight: 300;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+    max-width: 100%;
+  }
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+    font-weight: 300;
+    letter-spacing: -0.02em;
+  }
+  p {
+    text-wrap: pretty;
+  }
+  code,
+  kbd,
+  samp,
+  .font-mono {
+    font-variant-numeric: tabular-nums;
+  }
+  :focus-visible {
+    outline: 2px solid var(--verified);
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+  .surface-card {
+    @apply rounded-[28px] border border-white/[0.08] bg-[#0C100E]/90 shadow-specular-top backdrop-blur-xl transition-all duration-300;
+  }
+  .surface-card-interactive {
+    @apply surface-card hover:border-white/20;
+  }
+  .surface-inset {
+    @apply rounded-2xl border border-white/[0.07] bg-[#070908]/95;
+  }
+  .label-mono {
+    @apply text-xs font-normal tracking-[0.04em] text-white/55;
+  }
+
+  /* Sylva Tactile Ivory Card (matches `.card` from `the code on the site.rtf`) */
+  .sylva-ivory-card {
+    background-color: #F2F3EF;
+    color: #1C201B;
+    border: 1px solid #E2E5DC;
+    border-radius: 36px;
+    box-shadow:
+      0 30px 70px rgba(5, 8, 6, 0.45),
+      inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    transition:
+      box-shadow 0.6s var(--sylva-ease),
+      transform 0.5s var(--sylva-ease-out);
+  }
+  .sylva-ivory-card:hover {
+    box-shadow:
+      0 38px 84px rgba(5, 8, 6, 0.55),
+      inset 0 1px 0 rgba(255, 255, 255, 0.95);
+  }
+
+  /* Sylva Liquid-Metal / Specular Glass Pill Plate */
+  .sylva-liquid-pill {
+    position: relative;
+    border-radius: 999px;
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.11), rgba(255, 255, 255, 0.02) 44%, rgba(255, 255, 255, 0) 64%),
+      rgba(12, 16, 14, 0.72);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    box-shadow:
+      0 6px 16px rgba(0, 0, 0, 0.42),
+      0 18px 38px rgba(0, 0, 0, 0.32),
+      inset 0 1px 0 rgba(255, 255, 255, 0.18),
+      inset 0 -1px 3px rgba(16, 185, 129, 0.12);
+    transition:
+      box-shadow 0.38s var(--sylva-ease),
+      background 0.38s var(--sylva-ease),
+      transform 0.3s var(--sylva-ease-out),
+      border-color 0.3s var(--sylva-ease);
+  }
+  .sylva-liquid-pill:hover {
+    border-color: rgba(255, 255, 255, 0.28);
+    box-shadow:
+      0 8px 20px rgba(0, 0, 0, 0.5),
+      0 24px 48px rgba(0, 0, 0, 0.38),
+      0 0 28px rgba(52, 211, 153, 0.14),
+      inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  }
+
+  /* Sylva Circular Action Knob (`.knob` from `the code on the site.rtf`) */
+  .sylva-knob {
+    display: grid;
+    place-items: center;
+    border-radius: 9999px;
+    background: #FBFCF8;
+    color: #2A3128;
+    border: 1px solid rgba(28, 32, 27, 0.08);
+    box-shadow: 0 6px 18px rgba(10, 14, 10, 0.18);
+    transition:
+      transform 0.5s var(--sylva-ease-out),
+      background-color 0.4s var(--sylva-ease);
+  }
+  .sylva-knob:hover {
+    transform: scale(1.08) rotate(8deg);
+    background: #FFFFFF;
+  }
+
+  /* Sylva Pointer-Tracking Specular Rim (`[data-spec]` from `the code on the site.rtf`) */
+  [data-spec] {
+    --spec-angle: 2.4rad;
+    --spec-bright: 0.35;
+    position: relative;
+  }
+  [data-spec]::after {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    z-index: 5;
+    padding: 1px;
+    border-radius: inherit;
+    pointer-events: none;
+    opacity: var(--spec-bright, 0.35);
+    background: conic-gradient(
+      from var(--spec-angle, 2.4rad) at 50% 50%,
+      rgba(235, 245, 232, 0) 0deg,
+      rgba(235, 245, 232, 0.1) 14deg,
+      rgba(235, 245, 232, 0.92) 28deg,
+      rgba(235, 245, 232, 0.18) 46deg,
+      rgba(235, 245, 232, 0) 68deg,
+      rgba(235, 245, 232, 0) 180deg,
+      rgba(235, 245, 232, 0.1) 194deg,
+      rgba(235, 245, 232, 0.92) 208deg,
+      rgba(235, 245, 232, 0.18) 226deg,
+      rgba(235, 245, 232, 0) 248deg,
+      rgba(235, 245, 232, 0) 360deg
+    );
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+  }
+
+  /* Sylva Pointer Parallax Transform (`.par` from `the code on the site.rtf`) */
+  .sylva-par {
+    transform:
+      perspective(1400px)
+      translate3d(
+        calc(var(--px, 0) * var(--pd, 0) * -1px),
+        calc(var(--py, 0) * var(--pd, 0) * -0.62px),
+        0
+      )
+      rotateY(calc(var(--px, 0) * var(--pr, 0) * 1deg))
+      rotateX(calc(var(--py, 0) * var(--pr, 0) * -0.7deg));
+    transition: transform 0.12s linear;
+  }
+
+  .sylva-crosshair {
+    @apply pointer-events-none select-none font-mono text-[11px] leading-none text-white/25;
+  }
+
+  /* Static film-grain overlay (SVG noise, 5% opacity, never animated) per DESIGN.md */
+  .film-grain {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.05;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  }
+
+  /* DESIGN.md Typography primitives */
+  .type-display {
+    font-weight: 300;
+    letter-spacing: -0.03em;
+    line-height: 1.0;
+    font-size: clamp(34px, 8.5vw, 96px);
+  }
+
+  .type-body {
+    font-size: 17px;
+    line-height: 1.6;
+    max-width: 62ch;
+  }
+
+  .type-label {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+@keyframes sylva-trickle {
+  0% {
+    transform: translateY(-105%);
+    opacity: 0;
+  }
+  22% {
+    opacity: 1;
+  }
+  78% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(255%);
+    opacity: 0;
+  }
+}
+
+.sylva-scroll-track::after {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 40%;
+  background: rgba(255, 255, 255, 0.78);
+  animation: sylva-trickle 2.6s cubic-bezier(0.22, 0.61, 0.36, 1) infinite;
+}
+
+@media (scripting: enabled) {
+  [data-gsap-pending="true"] [data-anim] {
+    visibility: hidden;
+  }
+}
+
+/* Touch-friendly Executive Range Sliders */
+.cfo-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  outline: none;
+  cursor: pointer;
+}
+.cfo-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  background: #F2F3EF;
+  border: 2px solid #1C201B;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.45);
+  cursor: pointer;
+  transition: transform 0.18s ease, background-color 0.18s ease;
+}
+.cfo-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.12);
+  background: #ffffff;
+}
+.cfo-slider::-moz-range-thumb {
+  width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  background: #F2F3EF;
+  border: 2px solid #1C201B;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.45);
+  cursor: pointer;
+}
+
+html {
+  scrollbar-width: thin;
+  scrollbar-color: #27302a transparent;
+}
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #27302a;
+  border: 2px solid #070908;
+  border-radius: 6px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #39463d;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .sylva-par {
+    transform: none !important;
+  }
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition: none !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "org_id": "00000000-0000-0000-0000-000000000001",
+  "event_id": "evt_98471928374",
+  "type": "draft_created",
+  "occurred_at": "2026-10-26T14:15:30.220Z",
+  "ticket_ref": "zen_88192",
+  "channel": "zendesk",
+  "topic": "hardware_return",
+  "latency_ms": 220,
+  "model_cost_usd": 0.0035
+}
